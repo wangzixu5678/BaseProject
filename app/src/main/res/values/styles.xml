@@ -1,11 +1,49 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="text_10_000000">
+        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="text_12_000000">
+        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="text_14_000000">
+        <item name="android:textSize">@dimen/x14</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="text_16_000000">
+        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="text_18_000000">
+        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+    <style name="text_20_000000">
+        <item name="android:textSize">@dimen/x20</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
+    <style name="lineH1">
+        <item name="android:background">@color/linecolor</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/y1</item>
+    </style>
+
+
+    <style name="loading" parent="Theme.AppCompat.Dialog">
+        <item name="android:backgroundDimEnabled">false</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+    </style>
 </resources>

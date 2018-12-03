@@ -1,0 +1,86 @@
+def supportVersion = "27.1.1"
+def okHttpVersion = "3.10.0"
+def retrofitVersion = "2.3.0"
+def stethoVersion = "1.5.0"
+def leakCanaryVersion = "1.5.4"
+ext {
+    android = [
+            compileSdkVersion: 27,
+            buildToolsVersion: "27.0.3",
+            applicationId    : "com.example.hdxy.baseproject",
+            minSdkVersion    : 16,
+            targetSdkVersion : 27,
+            versionCode      : 1,
+            versionName      : "1.0.0"
+    ]
+
+    support = [
+            constraintLayout      : "com.android.support.constraint:constraint-layout:1.1.2",
+            multidex    : "com.android.support:multidex:1.0.3",
+            supportAppcompatV7   : "com.android.support:appcompat-v7:${supportVersion}",//得到宏定义字符串，要用双引号
+            supportV4   : "com.android.support:support-v4:${supportVersion}",
+            design      : "com.android.support:design:${supportVersion}",
+            recyclerview: "com.android.support:recyclerview-v7:${supportVersion}",
+            cardview: "com.android.support:cardview-v7:${supportVersion}",
+            gridlayout: "com.android.support:gridlayout-v7:${supportVersion}",
+            annotations: "com.android.support:support-annotations:${supportVersion}",
+            vectorDrawable: "com.android.support:support-vector-drawable:${supportVersion}",
+            animatedVectorDrawable: "com.android.support:animated-vector-drawable:${supportVersion}",
+    ]
+
+    //黄油刀
+    butterknife = "com.jakewharton:butterknife:8.8.1"
+    butterknifeCompiler = "com.jakewharton:butterknife-compiler:8.8.1"
+    //RecyclerView适配器
+    baseRecyclerViewAdapterHelper = "com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34"
+    //下拉刷新
+    smartRefreshLayout =  "com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1"
+    //图片加载
+    glide = "com.github.bumptech.glide:glide:3.7.0"
+    //Banner轮播
+    banner = "com.youth.banner:banner:1.4.10"
+    //本地广播
+    eventBus = "org.greenrobot:eventbus:3.1.1"
+    //Gson
+    gson = "com.google.code.gson:gson:2.8.0"
+    //OkHttp
+    okhttp = "com.squareup.okhttp3:okhttp:${okHttpVersion}"
+    okhttpLoggingInterceptor = "com.squareup.okhttp3:logging-interceptor:${okHttpVersion}"
+    okio = "com.squareup.okio:okio:1.13.0"
+    //Retrofit
+    retrofit = "com.squareup.retrofit2:retrofit:${retrofitVersion}"
+    retrofitRxjava = "com.squareup.retrofit2:adapter-rxjava2:${retrofitVersion}"
+    retrofitConverterGson = "com.squareup.retrofit2:converter-gson:${retrofitVersion}"
+    retrofitScalars = "com.squareup.retrofit2:converter-scalars:${retrofitVersion}"
+    //Rxjava
+    rxJava = "io.reactivex.rxjava2:rxjava:2.1.8"
+    rxAndroid = "io.reactivex.rxjava2:rxandroid:2.0.1"
+    //multidex
+    multidex = "com.android.support:multidex:1.0.1"
+    //沉浸状态栏
+    statusBar = "com.githang:status-bar-compat:0.7"
+    //WebView快速集成框架
+    agentWeb = "com.just.agentweb:agentweb:4.0.2"
+    //图片剪裁
+    uCrop = "com.github.yalantis:ucrop:2.2.2"
+    //Loading
+    spinKit =  "com.github.ybq:Android-SpinKit:1.2.0"
+
+
+    //facebook出品的网络调试神器
+    stetho = "com.facebook.stetho:stetho:${stethoVersion}"
+    stethoOkhttp = "com.facebook.stetho:stetho-okhttp3:${stethoVersion}"
+
+    //检测内存泄漏
+    leakCanary = "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    leakCanaryDebug = "com.squareup.leakcanary:leakcanary-android:${leakCanaryVersion}"
+    leakCanaryRelease = "com.squareup.leakcanary:leakcanary-android-no-op:${leakCanaryVersion}"
+
+    //吐司工具类
+    toast =  "com.hjq:toast:5.0"
+
+
+    umengAnalytics = "com.umeng.umsdk:analytics:7.5.4"
+    umengCommon  = "com.umeng.umsdk:common:1.5.4"
+
+}

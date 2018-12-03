@@ -1,28 +1,75 @@
 apply plugin: 'com.android.application'
+def ext = rootProject.ext
+def config = rootProject.ext.android
+def support = rootProject.ext.support
 
 android {
-    compileSdkVersion 26
+    compileSdkVersion config.compileSdkVersion
+    buildToolsVersion config.buildToolsVersion
     defaultConfig {
-        applicationId "com.example.hdxy.baseproject"
-        minSdkVersion 15
-        targetSdkVersion 26
-        versionCode 1
-        versionName "1.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        applicationId config.applicationId
+        minSdkVersion config.minSdkVersion
+        targetSdkVersion config.targetSdkVersion
+        versionCode config.versionCode
+        versionName config.versionName
+        vectorDrawables.useSupportLibrary = true
+        multiDexEnabled true
     }
+
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+
 }
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation 'com.android.support:appcompat-v7:26.1.0'
-    implementation 'com.android.support.constraint:constraint-layout:1.1.3'
-    testImplementation 'junit:junit:4.12'
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
+    implementation support.constraintLayout
+    implementation support.supportV4
+    implementation support.supportAppcompatV7
+    implementation support.design
+    implementation support.recyclerview
+    implementation support.cardview
+
+    implementation ext.baseRecyclerViewAdapterHelper
+    implementation ext.butterknife
+    annotationProcessor ext.butterknifeCompiler
+    implementation ext.smartRefreshLayout
+    implementation ext.glide
+    implementation ext.banner
+    implementation ext.eventBus
+    implementation ext.gson
+    implementation ext.okhttp
+    implementation ext.okhttpLoggingInterceptor
+    implementation ext.okio
+    implementation ext.retrofit
+    implementation ext.retrofitRxjava
+    implementation ext.retrofitConverterGson
+    implementation ext.retrofitScalars
+    implementation ext.rxJava
+    implementation ext.rxAndroid
+    implementation ext.multidex
+    implementation ext.statusBar
+    implementation ext.agentWeb
+    implementation (ext.uCrop){
+        exclude group: 'com.android.support'
+    }
+    implementation ext.uCrop
+    implementation ext.spinKit
+
+    implementation ext.stetho
+    implementation ext.stethoOkhttp
+
+    implementation ext.leakCanary
+
+    implementation ext.toast
+
+
+    implementation ext.umengCommon
+    implementation ext.umengAnalytics
+
+
 }
