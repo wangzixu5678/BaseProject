@@ -7,6 +7,7 @@ import android.support.multidex.MultiDex;
 
 import com.example.hdxy.baseproject.Http.HttpManager;
 import com.example.hdxy.baseproject.R;
+import com.example.hdxy.baseproject.Util.SharedPreferencesUtil;
 import com.facebook.stetho.Stetho;
 import com.hjq.toast.ToastUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
@@ -55,6 +56,8 @@ public class App extends Application {
 
         //初始化网络加载
         HttpManager.init(this);
+
+        SharedPreferencesUtil.init(this,"appname",MODE_PRIVATE);
         //初始化FaceBook调试神器
         Stetho.initializeWithDefaults(this);
         //初始化监测内存泄漏

@@ -1,5 +1,6 @@
 package com.example.hdxy.baseproject.UI.home.act;
 
+import com.apkfuns.logutils.LogUtils;
 import com.example.hdxy.baseproject.Base.BaseActivity;
 import com.example.hdxy.baseproject.Http.HttpManager;
 import com.example.hdxy.baseproject.Http.subscriber.DialogObserver;
@@ -7,12 +8,15 @@ import com.example.hdxy.baseproject.R;
 import com.example.hdxy.baseproject.UI.home.bean.BookInfoBean;
 import com.hjq.toast.ToastUtils;
 
+import java.util.ArrayList;
+
+
 public class HomeActivity extends BaseActivity {
 
 
 
     @Override
-    protected int getLayoutRes() {
+    protected int getLayoutId() {
         return R.layout.activity_main;
     }
 
@@ -34,6 +38,12 @@ public class HomeActivity extends BaseActivity {
 
             }
         });
+
+        ArrayList<Object> list = new ArrayList<>();
+        for (int i = 0; i < 10; i++) {
+            list.add("哈哈"+i);
+        }
+        LogUtils.d(list);
     }
 
 

@@ -71,5 +71,7 @@ dependencies {
     implementation ext.umengCommon
     implementation ext.umengAnalytics
 
+    implementation ext.logUtils
+
 
 }

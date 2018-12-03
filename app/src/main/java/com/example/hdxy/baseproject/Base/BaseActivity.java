@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -19,6 +20,7 @@ import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
 import com.squareup.leakcanary.RefWatcher;
 import com.umeng.analytics.MobclickAgent;
+import com.youth.banner.WeakHandler;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -46,11 +48,14 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseImpl
     private TextView mTvRight;
     private FrameLayout mFlRightContent;
     private TextView mTvTitle;
+    protected WeakHandler mWeakHandler = new WeakHandler();
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(getLayoutRes());
+        if (getLayoutId() > 0) {
+            setContentView(getLayoutId());
+        }
         //锁定竖屏
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         //初始化监测内存泄漏
@@ -62,6 +67,8 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseImpl
         initCommonUI();
         //初始化数据相关
         initAll();
+
+
     }
 
     protected  void initCommonUI(){
@@ -236,7 +243,7 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseImpl
 
 
 
-    protected abstract int getLayoutRes();
+    protected abstract int getLayoutId();
 
     protected abstract void initAll();
 
@@ -244,11 +251,12 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseImpl
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        unbinder.unbind();
-        EventBus.getDefault().unregister(this);
         if (mCompositeDisposable!=null){
             mCompositeDisposable.clear();
         }
+        unbinder.unbind();
+        EventBus.getDefault().unregister(this);
+
     }
 
     @Override
@@ -278,5 +286,17 @@ public abstract class BaseActivity extends AppCompatActivity implements BaseImpl
     }
     public Activity getActivity(){
         return this;
+    }
+
+
+    @Override
+    public void finish() {
+        // 隐藏软键盘，避免软键盘引发的内存泄露
+        View view = getCurrentFocus();
+        if (view != null) {
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            if (imm != null) imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        }
+        super.finish();
     }
 }

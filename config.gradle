@@ -80,7 +80,11 @@ ext {
     toast =  "com.hjq:toast:5.0"
 
 
+    //友盟统计
     umengAnalytics = "com.umeng.umsdk:analytics:7.5.4"
     umengCommon  = "com.umeng.umsdk:common:1.5.4"
+
+    //LOG日志接口
+    logUtils =  "com.apkfuns.logutils:library:1.6.1"
 
 }
