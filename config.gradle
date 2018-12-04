@@ -87,4 +87,7 @@ ext {
     //LOG日志接口
     logUtils =  "com.apkfuns.logutils:library:1.6.1"
 
+    //FlexboxLayout
+    flexbox = "com.google.android:flexbox:0.3.0-alpha3"
+
 }

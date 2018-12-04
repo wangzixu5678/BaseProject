@@ -72,6 +72,11 @@ dependencies {
     implementation ext.umengAnalytics
 
     implementation ext.logUtils
+    implementation ext.flexbox
 
+    /**
+     * 网络框架 EaseHttp
+     * MVP 框架 XMVP
+     */
 
 }

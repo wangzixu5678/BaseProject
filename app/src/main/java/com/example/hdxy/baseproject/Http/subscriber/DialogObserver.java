@@ -13,6 +13,11 @@ public abstract class DialogObserver<T> extends BaseObserver<T> {
     private boolean mHasLoading;
     private LoadingPopWindown mLoadingPopWindown;
 
+
+    public DialogObserver(BaseImpl baseImpl) {
+        super(baseImpl);
+    }
+
     public DialogObserver(BaseImpl baseImpl, boolean hasLoading) {
         super(baseImpl);
         mHasLoading = hasLoading;

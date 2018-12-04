@@ -69,9 +69,6 @@ public class App extends Application {
         //初始化吐司
         ToastUtils.init(this);
 
-
-
-
     }
 
     public static RefWatcher getRefWatcher(Context context){

@@ -3,6 +3,7 @@ package com.example.hdxy.baseproject.Http.subscriber;
 
 import com.example.hdxy.baseproject.Base.BaseImpl;
 import com.example.hdxy.baseproject.Http.exception.ApiException;
+import com.example.hdxy.baseproject.Util.StringUtil;
 import com.google.gson.stream.MalformedJsonException;
 
 import java.net.ConnectException;
@@ -59,15 +60,8 @@ public abstract class BaseObserver<T> implements Observer<T> {
                 }
             }
         }else {
-            String msg = e.getMessage();
-            int code;
-            if (msg.contains("#")) {
-                code = Integer.parseInt(msg.split("#")[0]);
-                onBaseError(code, msg.split("#")[1]);
-            } else {
-                code = ApiException.Code_Default;
-                onBaseError(code, msg);
-            }
+            String message = e.getMessage();
+            onBaseError(ApiException.Code_Default, StringUtil.judgeString(message));
         }
     }
 

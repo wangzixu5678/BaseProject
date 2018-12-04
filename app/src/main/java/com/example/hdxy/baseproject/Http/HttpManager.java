@@ -5,7 +5,6 @@ import android.content.Context;
 import com.example.hdxy.baseproject.Http.api.ApiResponse;
 import com.example.hdxy.baseproject.Http.api.ApiService;
 import com.example.hdxy.baseproject.Http.exception.ApiException;
-import com.example.hdxy.baseproject.UI.home.bean.BookInfoBean;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
 
 import java.util.HashMap;
@@ -31,43 +30,38 @@ import retrofit2.converter.scalars.ScalarsConverterFactory;
 public class HttpManager{
 
     private static final int DEFAULT_TIME = 20;
-    private static Retrofit mRetrofit;
-    private static HttpManager instance;
     private static Context mContext;
-    private final ApiService mApiService;
+    private static Retrofit sRetrofit;
+    private static ApiService sApiService;
 
     public static void init(Context context){
         mContext=context;
     }
 
-    private HttpManager(){
-        OkHttpClient okHttpClient = new OkHttpClient.Builder()
-                .connectTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
-                .writeTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
-                .readTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
-                .addInterceptor(new StethoInterceptor())
-                .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
-                .build();
-        mRetrofit = new Retrofit.Builder()
-                .baseUrl(NetAddressConstants.BASEURL)
-                .client(okHttpClient)
-                .addConverterFactory(ScalarsConverterFactory.create())
-                .addConverterFactory(GsonConverterFactory.create())
-                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                .build();
-        mApiService = mRetrofit.create(ApiService.class);
+
+    public synchronized static ApiService getApiService(){
+        if (sApiService ==null){
+            OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                    .connectTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
+                    .writeTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
+                    .readTimeout(DEFAULT_TIME, TimeUnit.SECONDS)
+                    .addInterceptor(new StethoInterceptor())
+                    .addInterceptor(new HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+                    .build();
+            sRetrofit = new Retrofit.Builder()
+                    .baseUrl(NetAddressConstants.BASEURL)
+                    .client(okHttpClient)
+                    .addConverterFactory(ScalarsConverterFactory.create())
+                    .addConverterFactory(GsonConverterFactory.create())
+                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                    .build();
+
+            sApiService = sRetrofit.create(ApiService.class);
+        }
+        return sApiService;
     }
 
-    public static HttpManager getInstance() {
-        if (instance == null) {
-            synchronized (HttpManager.class) {
-                if (instance == null) {
-                    instance = new HttpManager();
-                }
-            }
-        }
-        return instance;
-    }
+
 
 
     protected HashMap<String, Object> getHeaderMap() {
@@ -99,9 +93,6 @@ public class HttpManager{
 
 
 
-    public void getBookInfoBean(Observer<BookInfoBean> observer){
-        toSubscribe(mApiService.getHomeInfo(),observer);
-    }
 
 
 

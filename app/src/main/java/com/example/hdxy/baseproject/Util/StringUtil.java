@@ -12,4 +12,12 @@ public class StringUtil{
             return false;
         }
     }
+
+    //过滤一下为空字段
+    public static String judgeString(String s){
+        if (null == s || "".equals(s.trim()) || "null".equals(s) || "0".equals(s)) {
+            return "";
+        }
+        return s;
+    }
 }
