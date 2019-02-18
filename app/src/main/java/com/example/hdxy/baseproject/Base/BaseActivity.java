@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.hdxy.baseproject.Base.basemvp.presenters.XBasePresenter;
 import com.example.hdxy.baseproject.Base.basemvp.utils.GenericHelper;
 import com.example.hdxy.baseproject.R;
+import com.example.hdxy.baseproject.Util.AppManager;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -63,7 +64,11 @@ public abstract class BaseActivity<T extends XBasePresenter> extends AppCompatAc
             e.printStackTrace();
         }
 
+
         super.onCreate(savedInstanceState);
+
+        AppManager.getInstance().addActivity(this);
+
         if (getLayoutId() > 0) {
             setContentView(getLayoutId());
         }
@@ -289,6 +294,7 @@ public abstract class BaseActivity<T extends XBasePresenter> extends AppCompatAc
             presenter.end();
         }
         unbinder.unbind();
+        AppManager.getInstance().finishActivity(this);
     }
 
     @Override
