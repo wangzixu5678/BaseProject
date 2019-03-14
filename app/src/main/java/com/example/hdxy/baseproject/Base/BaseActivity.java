@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -18,6 +19,7 @@ import com.example.hdxy.baseproject.Base.basemvp.presenters.XBasePresenter;
 import com.example.hdxy.baseproject.Base.basemvp.utils.GenericHelper;
 import com.example.hdxy.baseproject.R;
 import com.example.hdxy.baseproject.Util.AppManager;
+import com.example.hdxy.baseproject.Util.screenadapter.AdaptScreenUtils;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
@@ -336,5 +338,10 @@ public abstract class BaseActivity<T extends XBasePresenter> extends AppCompatAc
             if (imm != null) imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
         super.finish();
+    }
+
+    @Override
+    public Resources getResources() {
+        return AdaptScreenUtils.adaptWidth(super.getResources(), 375);
     }
 }

@@ -18,8 +18,7 @@ public class HomeModel extends HttpManager implements HomeContract.Model {
 
     @Override
     public void getBookInfo(Observer<BookInfoBean> observer) {
-        Observable<ApiResponse<BookInfoBean>> observable = getApiService().getHomeInfo();
-        toSubscribe(observable,observer);
+
     }
 
     @Override

@@ -4,4 +4,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
     <include layout="@layout/common_title"/>
+
+    <LinearLayout
+        android:background="#f00"
+        android:layout_width="300pt"
+        android:layout_height="match_parent"/>
 </LinearLayout>

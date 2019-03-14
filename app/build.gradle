@@ -54,9 +54,9 @@ dependencies {
     implementation ext.multidex
     implementation ext.statusBar
     implementation ext.agentWeb
-    implementation (ext.uCrop){
-        exclude group: 'com.android.support'
-    }
+//    implementation (ext.uCrop){
+//        exclude group: 'com.android.support'
+//    }
     implementation ext.uCrop
     implementation ext.spinKit
 
