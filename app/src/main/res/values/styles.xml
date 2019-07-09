@@ -9,28 +9,28 @@
     </style>
 
     <style name="text_10_000000">
-        <item name="android:textSize">@dimen/x10</item>
+        <item name="android:textSize">10pt</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="text_12_000000">
-        <item name="android:textSize">@dimen/x12</item>
+        <item name="android:textSize">12pt</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="text_14_000000">
-        <item name="android:textSize">@dimen/x14</item>
+        <item name="android:textSize">14pt</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
     <style name="text_16_000000">
-        <item name="android:textSize">@dimen/x16</item>
+        <item name="android:textSize">16pt</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="text_18_000000">
-        <item name="android:textSize">@dimen/x18</item>
+        <item name="android:textSize">18pt</item>
         <item name="android:textColor">@color/black</item>
     </style>
     <style name="text_20_000000">
-        <item name="android:textSize">@dimen/x20</item>
+        <item name="android:textSize">20pt</item>
         <item name="android:textColor">@color/black</item>
     </style>
 
@@ -38,7 +38,7 @@
     <style name="lineH1">
         <item name="android:background">@color/linecolor</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">@dimen/y1</item>
+        <item name="android:layout_height">1pt</item>
     </style>
 
 

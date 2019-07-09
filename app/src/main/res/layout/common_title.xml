@@ -78,5 +78,5 @@
         android:layout_gravity="bottom"
         android:background="#ececec"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/y1"/>
+        android:layout_height="1px"/>
 </FrameLayout>

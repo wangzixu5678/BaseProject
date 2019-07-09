@@ -1,5 +1,4 @@
 package com.example.hdxy.baseproject.UI.home.act;
-
 import com.example.hdxy.baseproject.Base.BaseActivity;
 import com.example.hdxy.baseproject.R;
 import com.example.hdxy.baseproject.UI.home.bean.BookInfoBean;
@@ -22,14 +21,12 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     protected void initIntent() {
 
     }
-
     @Override
     protected void initCircle() {
         setBackTitle("HomeActivity",null);
         presenter.getBookInfoFromNet(this);
         presenter.textRxjavaLife(this);
     }
-
 
     @Override
     public void onBookInfoSuccess(BookInfoBean data) {

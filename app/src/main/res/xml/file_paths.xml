@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <paths xmlns:android="http://schemas.android.com/apk/res/android">
-    <!--    1、name对应的属性值，开发者可以自由定义；    2、path对应的属性值，当前external-path标签下的相对路径    比如：/storage/emulated/0/s-release.apk    sdcard路径：/storage/emulated/0(WriteToReadActivity.java:176)                      at cn.teachcourse.nougat.WriteToReadActivity.onClick(WriteToReadActivity.java:97)                      at android.view.View.performClick(View.java:5610)                      at android.view.View$PerformClick.run(View.java:22265)    相对路径：/    -->    <!--1、对应内部内存卡根目录：Context.getFileDir()-->
+    <!--    1、name对应的属性值，开发者可以自由定义；
+            2、path对应的属性值，当前external-path标签下的相对路径    比如：/storage/emulated/0/s-release.apk    sdcard路径：/storage/emulated/0(WriteToReadActivity.java:176)                      at cn.teachcourse.nougat.WriteToReadActivity.onClick(WriteToReadActivity.java:97)                      at android.view.View.performClick(View.java:5610)                      at android.view.View$PerformClick.run(View.java:22265)    相对路径：/    -->    <!--1、对应内部内存卡根目录：Context.getFileDir()-->
     <files-path
         name="int_root"
         path="/" />    <!--2、对应应用默认缓存根目录：Context.getCacheDir()-->
@@ -16,4 +17,8 @@
     <external-cache-path
         name="ext_cache"
         path="/" />
+    <!--配置root-path。这样子可以读取到sd卡和一些应用分身的目录，否则微信分身保存的图片，就会导致 java.lang.IllegalArgumentException: Failed to find configured root that contains /storage/emulated/999/tencent/MicroMsg/WeiXin/export1544062754693.jpg，在小米6的手机上微信分身有这个crash，华为没有-->
+    <root-path
+        name="root-path"
+        path="" />
 </paths>
