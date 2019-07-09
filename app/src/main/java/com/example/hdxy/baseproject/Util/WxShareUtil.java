@@ -1,46 +1,31 @@
 ﻿package com.example.hdxy.baseproject.Util;
 
-import android.content.Context;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.text.TextUtils;
-import android.widget.Toast;
-
-import com.example.hdxy.baseproject.R;
-
-import java.io.InputStream;
-import java.net.HttpURLConnection;
-import java.net.URL;
-
-
-
-
 /**
  * wechatShare(0);//分享到微信好友
  * wechatShare(1);//分享到微信朋友圈
  */
-public class WRKShareUtil {
+public class WxShareUtil {
 
 //    private IWXAPI wxapi;
-//    private static WRKShareUtil instance;
+//    private static WxShareUtil instance;
 //
 //    private static final int TIMELINE_SUPPORTED_VERSION = 0x21020001;
 //    private static final int THUMB_SIZE = 100; //缩略图大小
 //    private static String appID;
 //
-//    private WRKShareUtil(String appID) {
+//    private WxShareUtil(String appID) {
 //        this.appID = appID;
 //    }
 //
-//    public static WRKShareUtil getInstance() {
+//    public static WxShareUtil getInstance() {
 //        if (instance == null) {
-//            synchronized (WRKShareUtil.class) {
+//            synchronized (WxShareUtil.class) {
 //                if (instance == null) {
 //                    if (appID == null) {
 //			//获取清单文件中的APP_ID
 //                        appID = WRKServiceMgr.getAppMetaData(WRKApplication.getContext(), WRKCommon.WX_APP_ID);
 //                    }
-//                    instance = new WRKShareUtil(appID);
+//                    instance = new WxShareUtil(appID);
 //                }
 //            }
 //        }
