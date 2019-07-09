@@ -1,6 +1,7 @@
 ﻿package com.example.hdxy.baseproject.Util;
 
 /**
+ * 微信分享工具类
  * wechatShare(0);//分享到微信好友
  * wechatShare(1);//分享到微信朋友圈
  */
