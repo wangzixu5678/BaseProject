@@ -1,11 +1,15 @@
 package com.example.hdxy.baseproject.UI.home.mvp.model;
 
+import android.util.Log;
+
 import com.example.hdxy.baseproject.Http.HttpManager;
 import com.example.hdxy.baseproject.Http.api.ApiResponse;
 import com.example.hdxy.baseproject.UI.home.bean.BookInfoBean;
 import com.example.hdxy.baseproject.UI.home.mvp.contract.HomeContract;
 
+import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import io.reactivex.ObservableSource;
 import io.reactivex.Observer;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;

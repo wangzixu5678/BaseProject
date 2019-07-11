@@ -1,6 +1,8 @@
 package com.example.hdxy.baseproject.Http.subscriber;
 
 
+import android.util.Log;
+
 import com.example.hdxy.baseproject.Base.BaseImpl;
 import com.example.hdxy.baseproject.Http.exception.ApiException;
 import com.example.hdxy.baseproject.Util.StringUtil;
@@ -63,6 +65,7 @@ public abstract class BaseObserver<T> implements Observer<T> {
             String message = e.getMessage();
             onBaseError(ApiException.Code_Default, StringUtil.judgeString(message));
         }
+        Log.d("AAA", "onError: " + e.getMessage());
     }
 
     @Override

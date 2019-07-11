@@ -35,7 +35,7 @@ public class HomePresenter extends XBasePresenter<HomeContract.View,HomeModel> i
         model.textRxjavaLife(new DialogObserver<Integer>(base) {
             @Override
             protected void onBaseNext(Integer data) {
-                LogUtils.d(data + "");
+
             }
         });
     }

@@ -9,6 +9,8 @@ import com.example.hdxy.baseproject.UI.home.mvp.presenter.HomePresenter;
 import com.example.hdxy.baseproject.Widget.TitleBar;
 import com.hjq.toast.ToastUtils;
 
+import java.lang.ref.WeakReference;
+
 /**
  * Created by hdxy on 2018/12/4.
  */
@@ -28,11 +30,11 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
     }
     @Override
     protected void initCircle() {
-        presenter.getBookInfoFromNet(this);
-        presenter.textRxjavaLife(this);
+        WeakReference<HomeActivity> weakReference = new WeakReference<>(this);
+        presenter.getBookInfoFromNet(weakReference.get());
+        presenter.textRxjavaLife(weakReference.get());
 
         mTitleBar = findViewById(R.id.titlebar);
-        mTitleBar.bind(this);
         mTitleBar.setBackTitle("我是标题",null);
 
     }

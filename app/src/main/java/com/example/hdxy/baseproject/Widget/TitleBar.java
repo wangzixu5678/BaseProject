@@ -30,15 +30,14 @@ public class TitleBar extends FrameLayout {
     private ImageView mImgRight;
     private TextView mTvRight;
     private FrameLayout mFlRightContent;
-    private Activity mActivity;
     private OnLeftRightClickListener mOnLeftRightClickListener;
 
     public TitleBar(@NonNull Context context) {
-        this(context,null);
+        this(context, null);
     }
 
     public TitleBar(@NonNull Context context, @Nullable AttributeSet attrs) {
-        this(context, attrs,0);
+        this(context, attrs, 0);
     }
 
     public TitleBar(@NonNull Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -59,94 +58,41 @@ public class TitleBar extends FrameLayout {
     }
 
 
-    public void bind(Activity activity){
-        mActivity = activity;
-    }
-
-    public void setBackTitle(String title,Object rightRes){
-        if (mTvTitle!=null){
+    public void setBackTitle(String title, Object rightRes) {
+        if (mTvTitle != null) {
             mTvTitle.setText(title);
         }
 
-        if (mImgLeft!=null){
+        if (mImgLeft != null) {
             mImgLeft.setVisibility(View.VISIBLE);
             mImgLeft.setImageResource(R.drawable.back);
         }
-        if (rightRes!=null){
-            if (rightRes instanceof String){
-                if (mTvRight!=null){
+        if (rightRes != null) {
+            if (rightRes instanceof String) {
+                if (mTvRight != null) {
                     mTvRight.setVisibility(View.VISIBLE);
                     mTvRight.setText(((String) rightRes));
                 }
-            }else if (rightRes instanceof Integer){
-                if (mImgRight!=null){
+            } else if (rightRes instanceof Integer) {
+                if (mImgRight != null) {
                     mImgRight.setVisibility(View.VISIBLE);
-                    mImgRight.setImageResource((Integer)rightRes);
+                    mImgRight.setImageResource((Integer) rightRes);
                 }
             }
         }
 
-        if (mFlLeftContent!=null){
+        if (mFlLeftContent != null) {
             mFlLeftContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    mActivity.finish();
+                    if (mContext instanceof Activity) {
+                        ((Activity) mContext).finish();
+                    }
                 }
             });
         }
 
-        if (mFlRightContent!=null){
-            mFlRightContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                   mOnLeftRightClickListener.onRightClick();
-                }
-            });
-        }
-    }
-    public void setCustomTitle(Object leftRes,String title,Object rightRes){
-        if (mTvTitle!=null){
-            mTvTitle.setText(title);
-        }
-
-        if (leftRes!=null){
-            if (leftRes instanceof String){
-                if (mTvLeft!=null){
-                    mTvLeft.setVisibility(View.VISIBLE);
-                    mTvLeft.setText(((String) leftRes));
-                }
-            }else if (leftRes instanceof Integer){
-                if (mImgLeft!=null){
-                    mImgLeft.setVisibility(View.VISIBLE);
-                    mImgLeft.setImageResource((Integer)leftRes);
-                }
-            }
-        }
-
-        if (rightRes!=null){
-            if (rightRes instanceof String){
-                if (mTvRight!=null){
-                    mTvRight.setVisibility(View.VISIBLE);
-                    mTvRight.setText(((String) rightRes));
-                }
-            }else if (rightRes instanceof Integer){
-                if (mImgRight!=null){
-                    mImgRight.setVisibility(View.VISIBLE);
-                    mImgRight.setImageResource((Integer)rightRes);
-                }
-            }
-        }
-
-        if (mFlLeftContent!=null){
-            mFlLeftContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    mOnLeftRightClickListener.onLeftClick();
-                }
-            });
-        }
-
-        if (mFlRightContent!=null){
+        if (mFlRightContent != null) {
             mFlRightContent.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -155,26 +101,82 @@ public class TitleBar extends FrameLayout {
             });
         }
     }
-    public void setLeftTitleColor(int color){
-        if (mTvLeft!=null) {
+
+    public void setCustomTitle(Object leftRes, String title, Object rightRes) {
+        if (mTvTitle != null) {
+            mTvTitle.setText(title);
+        }
+
+        if (leftRes != null) {
+            if (leftRes instanceof String) {
+                if (mTvLeft != null) {
+                    mTvLeft.setVisibility(View.VISIBLE);
+                    mTvLeft.setText(((String) leftRes));
+                }
+            } else if (leftRes instanceof Integer) {
+                if (mImgLeft != null) {
+                    mImgLeft.setVisibility(View.VISIBLE);
+                    mImgLeft.setImageResource((Integer) leftRes);
+                }
+            }
+        }
+
+        if (rightRes != null) {
+            if (rightRes instanceof String) {
+                if (mTvRight != null) {
+                    mTvRight.setVisibility(View.VISIBLE);
+                    mTvRight.setText(((String) rightRes));
+                }
+            } else if (rightRes instanceof Integer) {
+                if (mImgRight != null) {
+                    mImgRight.setVisibility(View.VISIBLE);
+                    mImgRight.setImageResource((Integer) rightRes);
+                }
+            }
+        }
+
+        if (mFlLeftContent != null) {
+            mFlLeftContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnLeftRightClickListener.onLeftClick();
+                }
+            });
+        }
+
+        if (mFlRightContent != null) {
+            mFlRightContent.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    mOnLeftRightClickListener.onRightClick();
+                }
+            });
+        }
+    }
+
+    public void setLeftTitleColor(int color) {
+        if (mTvLeft != null) {
             mTvLeft.setTextColor(color);
         }
     }
-    public void setLeftRightColor(int color){
-        if (mTvRight!=null){
+
+    public void setLeftRightColor(int color) {
+        if (mTvRight != null) {
             mTvRight.setTextColor(color);
         }
     }
-    public void setLeftImgSize(int width,int height){
-        if (mImgLeft!=null){
+
+    public void setLeftImgSize(int width, int height) {
+        if (mImgLeft != null) {
             ViewGroup.LayoutParams layoutParams = mImgLeft.getLayoutParams();
             layoutParams.width = width;
             layoutParams.height = height;
             mImgLeft.setLayoutParams(layoutParams);
         }
     }
-    public void setRightImgSize(int width,int height){
-        if (mImgRight!=null){
+
+    public void setRightImgSize(int width, int height) {
+        if (mImgRight != null) {
             ViewGroup.LayoutParams layoutParams = mImgRight.getLayoutParams();
             layoutParams.width = width;
             layoutParams.height = height;
@@ -183,12 +185,13 @@ public class TitleBar extends FrameLayout {
     }
 
 
-    interface OnLeftRightClickListener{
+    interface OnLeftRightClickListener {
         void onLeftClick();
+
         void onRightClick();
     }
 
-    public void setOnLeftRightClickListener(OnLeftRightClickListener onLeftRightClickListener){
+    public void setOnLeftRightClickListener(OnLeftRightClickListener onLeftRightClickListener) {
         mOnLeftRightClickListener = onLeftRightClickListener;
     }
 
