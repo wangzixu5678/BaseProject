@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -15,10 +16,10 @@ import android.widget.TextView;
 import com.example.hdxy.baseproject.R;
 
 /**
- * description : 自定义标题栏
- * author : wzx
+ * description: 标题栏
+ * @author : wzx
  * email : 445826958@qq.com
- * date : 2019/7/10 09:40
+ * date : 2019/12/2
  */
 public class TitleBar extends FrameLayout {
 
@@ -48,13 +49,13 @@ public class TitleBar extends FrameLayout {
 
     private void initView() {
         View rootView = LayoutInflater.from(mContext).inflate(R.layout.common_title, this, true);
-        mImgLeft = ((ImageView) rootView.findViewById(R.id.img_left));
-        mTvLeft = ((TextView) rootView.findViewById(R.id.tv_left));
-        mFlLeftContent = ((FrameLayout) rootView.findViewById(R.id.fl_left_content));
-        mTvTitle = ((TextView) rootView.findViewById(R.id.tv_title));
-        mImgRight = ((ImageView) rootView.findViewById(R.id.img_right));
-        mTvRight = ((TextView) rootView.findViewById(R.id.tv_right));
-        mFlRightContent = ((FrameLayout) rootView.findViewById(R.id.fl_right_content));
+        mImgLeft = ((ImageView) rootView.findViewById(R.id.title_bar_img_left));
+        mTvLeft = ((TextView) rootView.findViewById(R.id.title_bar_tv_left));
+        mFlLeftContent = ((FrameLayout) rootView.findViewById(R.id.title_bar_fl_left_content));
+        mTvTitle = ((TextView) rootView.findViewById(R.id.title_bar_tv_title));
+        mImgRight = ((ImageView) rootView.findViewById(R.id.title_bar_img_right));
+        mTvRight = ((TextView) rootView.findViewById(R.id.title_bar_tv_right));
+        mFlRightContent = ((FrameLayout) rootView.findViewById(R.id.title_bar_fl_right_content));
     }
 
 
@@ -62,7 +63,6 @@ public class TitleBar extends FrameLayout {
         if (mTvTitle != null) {
             mTvTitle.setText(title);
         }
-
         if (mImgLeft != null) {
             mImgLeft.setVisibility(View.VISIBLE);
             mImgLeft.setImageResource(R.drawable.back);

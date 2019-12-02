@@ -10,14 +10,14 @@
         android:orientation="horizontal">
 
         <FrameLayout
-            android:id="@+id/fl_left_content"
+            android:id="@+id/title_bar_fl_left_content"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:clickable="true">
 
             <ImageView
                 android:visibility="invisible"
-                android:id="@+id/img_left"
+                android:id="@+id/title_bar_img_left"
                 android:layout_width="10dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
@@ -26,7 +26,7 @@
 
             <TextView
                 android:visibility="invisible"
-                android:id="@+id/tv_left"
+                android:id="@+id/title_bar_tv_left"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -37,7 +37,7 @@
         </FrameLayout>
 
         <TextView
-            android:id="@+id/tv_title"
+            android:id="@+id/title_bar_tv_title"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
@@ -48,14 +48,14 @@
             tools:text="标题" />
 
         <FrameLayout
-            android:id="@+id/fl_right_content"
+            android:id="@+id/title_bar_fl_right_content"
             android:layout_width="60dp"
             android:layout_height="match_parent"
             android:clickable="true">
 
             <ImageView
                 android:visibility="invisible"
-                android:id="@+id/img_right"
+                android:id="@+id/title_bar_img_right"
                 android:layout_width="10dp"
                 android:layout_height="16dp"
                 android:layout_gravity="center"
@@ -64,7 +64,7 @@
 
             <TextView
                 android:visibility="invisible"
-                android:id="@+id/tv_right"
+                android:id="@+id/title_bar_tv_right"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"

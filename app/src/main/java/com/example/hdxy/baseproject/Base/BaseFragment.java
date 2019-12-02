@@ -11,12 +11,19 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.bigkoo.alertview.AlertView;
+import com.bigkoo.alertview.OnItemClickListener;
+import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.example.hdxy.baseproject.Base.basemvp.presenters.XBasePresenter;
 import com.example.hdxy.baseproject.Base.basemvp.utils.GenericHelper;
 import com.example.hdxy.baseproject.R;
+import com.example.hdxy.baseproject.Widget.TitleBar;
 import com.scwang.smartrefresh.layout.api.RefreshLayout;
+import com.scwang.smartrefresh.layout.constant.RefreshState;
 import com.scwang.smartrefresh.layout.listener.OnLoadMoreListener;
 import com.scwang.smartrefresh.layout.listener.OnRefreshListener;
+
+import java.util.ArrayList;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
@@ -29,17 +36,13 @@ public abstract class BaseFragment<T extends XBasePresenter> extends Fragment {
     private T presenter;
     private View mRootView;
     private Unbinder unbinder;
-    private ImageView mImgLeft;
-    private TextView mTvLeft;
-    private FrameLayout mFlLeftContent;
-    private TextView mTvTitle;
-    private ImageView mImgRight;
-    private TextView mTvRight;
-    private FrameLayout mFlRightContent;
     private int mCurrentPager = 1;
     private RefreshLayout mRefreshLayout;
-    private boolean mIsVisible;
+    private boolean isRequestRefresh;
     private boolean mIsPrepare;
+    private boolean mIsForceLoad;
+    private boolean mIsFirstLoad;
+    private TitleBar mTitleBar;
 
     @Override
     public void onAttach(Context context) {
@@ -60,13 +63,15 @@ public abstract class BaseFragment<T extends XBasePresenter> extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         mRootView = inflater.inflate(getLayoutId(), container, false);
 
-        unbinder = ButterKnife.bind(this, mRootView);
+        unbinder = ButterKnife.bind(this,mRootView);
 
         initArguments(getArguments());
 
-        initCommonUI();
+        initCommonUi();
 
         mIsPrepare = true;
+        mIsFirstLoad = true;
+
 
         /**
          * 用户编写自己的逻辑代码
@@ -78,138 +83,18 @@ public abstract class BaseFragment<T extends XBasePresenter> extends Fragment {
         return mRootView;
     }
 
-
-    private void initCommonUI() {
-        initTitle();
-        initRefresh();
+    private void initCommonUi() {
+        initRefreshLayout();
+        initTitleBar();
     }
-    protected void setBackTitle(String title,Object rightRes){
-        if (mTvTitle!=null){
-            mTvTitle.setText(title);
-        }
 
-        if (mImgLeft!=null){
-            mImgLeft.setVisibility(View.VISIBLE);
-            mImgLeft.setImageResource(R.drawable.back);
-        }
-        if (rightRes!=null){
-            if (rightRes instanceof String){
-                if (mTvRight!=null){
-                    mTvRight.setVisibility(View.VISIBLE);
-                    mTvRight.setText(((String) rightRes));
-                }
-            }else if (rightRes instanceof Integer){
-                if (mImgRight!=null){
-                    mImgRight.setVisibility(View.VISIBLE);
-                    mImgRight.setImageResource((Integer)rightRes);
-                }
-            }
-        }
-
-        if (mFlLeftContent!=null){
-            mFlLeftContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getActivity().finish();
-                }
-            });
-        }
-
-        if (mFlRightContent!=null){
-            mFlRightContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickRight();
-                }
-            });
-        }
+    private void initTitleBar() {
+        mTitleBar = mRootView.findViewById(R.id.titlebar);
     }
-    protected void setCustomTitle(Object leftRes,String title,Object rightRes){
-        if (mTvTitle!=null){
-            mTvTitle.setText(title);
-        }
 
-        if (leftRes!=null){
-            if (leftRes instanceof String){
-                if (mTvLeft!=null){
-                    mTvLeft.setVisibility(View.VISIBLE);
-                    mTvLeft.setText(((String) leftRes));
-                }
-            }else if (leftRes instanceof Integer){
-                if (mImgLeft!=null){
-                    mImgLeft.setVisibility(View.VISIBLE);
-                    mImgLeft.setImageResource((Integer)leftRes);
-                }
-            }
-        }
-
-        if (rightRes!=null){
-            if (rightRes instanceof String){
-                if (mTvRight!=null){
-                    mTvRight.setVisibility(View.VISIBLE);
-                    mTvRight.setText(((String) rightRes));
-                }
-            }else if (rightRes instanceof Integer){
-                if (mImgRight!=null){
-                    mImgRight.setVisibility(View.VISIBLE);
-                    mImgRight.setImageResource((Integer)rightRes);
-                }
-            }
-        }
-
-        if (mFlLeftContent!=null){
-            mFlLeftContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickLeft();
-                }
-            });
-        }
-
-        if (mFlRightContent!=null){
-            mFlRightContent.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    onClickRight();
-                }
-            });
-        }
-    }
-    protected  void onClickLeft(){
-
-    }
-    protected  void onClickRight(){
-
-    }
-    protected void setLeftTitleColor(int color){
-        if (mTvLeft!=null) {
-            mTvLeft.setTextColor(color);
-        }
-    }
-    protected void setLeftRightColor(int color){
-        if (mTvRight!=null){
-            mTvRight.setTextColor(color);
-        }
-    }
-    protected void setLeftImgSize(int width,int height){
-        if (mImgLeft!=null){
-            ViewGroup.LayoutParams layoutParams = mImgLeft.getLayoutParams();
-            layoutParams.width = width;
-            layoutParams.height = height;
-            mImgLeft.setLayoutParams(layoutParams);
-        }
-    }
-    protected void setRightImgSize(int width,int height){
-        if (mImgRight!=null){
-            ViewGroup.LayoutParams layoutParams = mImgRight.getLayoutParams();
-            layoutParams.width = width;
-            layoutParams.height = height;
-            mImgRight.setLayoutParams(layoutParams);
-        }
-    }
-    private void initRefresh() {
+    private void initRefreshLayout() {
         mRefreshLayout = mRootView.findViewById(R.id.refreshlayout);
-        if (mRefreshLayout!=null){
+        if (mRefreshLayout != null) {
             mRefreshLayout.setOnRefreshListener(new OnRefreshListener() {
                 @Override
                 public void onRefresh(RefreshLayout refreshLayout) {
@@ -224,78 +109,189 @@ public abstract class BaseFragment<T extends XBasePresenter> extends Fragment {
             });
         }
     }
-    protected void refreshNetData(){
+
+    protected void refreshNetData() {
         mRefreshLayout.setNoMoreData(false);
         mCurrentPager = 1;
-        refreshNetInterface();
+        getListDataFromNet();
+        getDetailDataFromNet();
     }
-    protected void loadMoreNetData(){
-        mCurrentPager ++;
-        loadMoreNetInterface();
+
+    protected void loadMoreNetData() {
+        mCurrentPager++;
+        getListDataFromNet();
     }
 
     /**
-     * 下拉刷新网络请求调用
+     * 获取列表数据
      */
-    protected void refreshNetInterface(){
+    protected void getListDataFromNet() {
 
     }
 
     /**
      * 加载更多网络请求调用
      */
-    protected void loadMoreNetInterface(){
+    protected void getDetailDataFromNet() {
 
     }
 
-    private void initTitle() {
-        mImgLeft = ((ImageView) mRootView.findViewById(R.id.img_left));
-        mTvLeft = ((TextView) mRootView.findViewById(R.id.tv_left));
-        mFlLeftContent = ((FrameLayout) mRootView.findViewById(R.id.fl_left_content));
-        mTvTitle = ((TextView) mRootView.findViewById(R.id.tv_title));
-        mImgRight = ((ImageView) mRootView.findViewById(R.id.img_right));
-        mTvRight = ((TextView) mRootView.findViewById(R.id.tv_right));
-        mFlRightContent = ((FrameLayout) mRootView.findViewById(R.id.fl_right_content));
-    }
-
+    /**
+     * 获取布局layout
+     *
+     * @return
+     */
     protected abstract int getLayoutId();
 
+    /**
+     * 获取arguments
+     *
+     * @param arguments
+     */
     protected abstract void initArguments(Bundle arguments);
 
+    /**
+     * 初始化
+     */
     protected abstract void initCircle();
 
+    /**
+     * 必要时onResume刷新网络接口数据
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        if (isRequestRefresh) {
+            refreshNetData();
+            isRequestRefresh = false;
+        }
+    }
 
+
+    /**
+     * 在ViewPager中控制Fragment时显示隐藏方法
+     *
+     * @param isVisibleToUser
+     */
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
-
-        this.mIsVisible = isVisibleToUser;
-
         if (isVisibleToUser) {
-            onVisibleToUser();
+            lazyLoad();
         }
     }
 
     /**
-     * 用户可见时执行的操作
+     * 通过Fragment Hide Show的方式显示隐藏方法
      *
-     * @author 漆可
-     * @date 2016-5-26 下午4:09:39
+     * @param hidden
      */
-    protected void onVisibleToUser() {
-        if (mIsPrepare && mIsVisible) {
-            onLazyLoad();
+    @Override
+    public void onHiddenChanged(boolean hidden) {
+        super.onHiddenChanged(hidden);
+        if (hidden) {
+            lazyLoad();
         }
     }
 
     /**
-     * 懒加载，仅当用户可见且view初始化结束后才会执行
-     *
-     * @author 漆可
-     * @date 2016-5-26 下午4:10:20
+     * 强制重新调用onLazyLoad();
      */
-    protected void onLazyLoad(){
+    protected void setIsForceLoad(boolean forceload) {
+        mIsForceLoad = forceload;
+    }
 
+    private void lazyLoad() {
+        if (mIsPrepare) {
+            if (mIsFirstLoad || mIsForceLoad) {
+                mIsFirstLoad = false;
+                mIsForceLoad = false;
+                onLazyLoad();
+            }
+        }
+    }
+
+    /**
+     * 需要实现的懒加载调用方法
+     */
+    protected void onLazyLoad() {
+
+    }
+
+
+    /**
+     * 中间弹出Dialog
+     *
+     * @param msg      副标题
+     * @param cancle   取消按钮
+     * @param others   其他选项
+     * @param listener 监听
+     */
+    public void showAlertDialog(String msg, String cancle, String[] others, OnItemClickListener listener) {
+        AlertView alertView = new AlertView("提示", msg, cancle, null, others,getContext(), AlertView.Style.Alert, listener);
+        alertView.setCancelable(false);
+        alertView.show();
+    }
+
+    /**
+     * 底部弹出Dialog
+     *
+     * @param title    标题
+     * @param msg      副标题
+     * @param cancle   取消按钮
+     * @param others   其他选项
+     * @param listener 监听
+     */
+    public void showSheetDialog(String title, String msg, String cancle, String[] others, OnItemClickListener listener) {
+        AlertView alertView = new AlertView(title, msg, cancle, null, others,getContext(), AlertView.Style.ActionSheet, listener);
+        alertView.setCancelable(false);
+        alertView.show();
+    }
+
+
+    /**
+     * 成功网络请求回调时 统一加入数据 统一管理RefreshView
+     * @param baseQuickAdapter 适配器
+     * @param data 原有数据
+     * @param netData 新数据
+     * @param <T> 泛型T
+     */
+    public  <T> void  handleRefreshLayoutWhenResponse(BaseQuickAdapter baseQuickAdapter, ArrayList<T> data, ArrayList<T> netData){
+        if (mRefreshLayout.getState()== RefreshState.Loading) {
+            if (netData != null) {
+                data.addAll(netData);
+                baseQuickAdapter.notifyDataSetChanged();
+                if (netData.size() == 0) {
+                    mRefreshLayout.finishLoadMoreWithNoMoreData();
+                }
+            }
+            mRefreshLayout.finishLoadMore(true);
+        } else if (mRefreshLayout.getState()== RefreshState.Refreshing) {
+            mRefreshLayout.finishRefresh(true);
+            data.clear();
+            if (netData != null) {
+                data.addAll(netData);
+            }
+            baseQuickAdapter.notifyDataSetChanged();
+        } else {
+            data.clear();
+            if (netData != null) {
+                data.addAll(netData);
+            }
+            baseQuickAdapter.notifyDataSetChanged();
+        }
+    }
+
+    /**
+     * 失败网络请求回调时 统一加入数据 统一管理RefreshView
+     */
+    public void handleRefreshLayoutWhenResponseError() {
+        if (mRefreshLayout.getState() == RefreshState.Refreshing) {
+            mRefreshLayout.finishRefresh(false);
+        } else if (mRefreshLayout.getState() == RefreshState.Loading) {
+            mRefreshLayout.finishLoadMore(false);
+        } else {
+        }
     }
 
 

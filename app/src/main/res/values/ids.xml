@@ -3,4 +3,5 @@
     <item name="refreshlayout" type="id"/>
     <item name="titlebar" type="id"/>
     <item name="recyclerview" type="id"/>
+
 </resources>

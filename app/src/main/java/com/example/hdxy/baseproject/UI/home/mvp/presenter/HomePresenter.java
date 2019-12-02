@@ -1,6 +1,4 @@
 package com.example.hdxy.baseproject.UI.home.mvp.presenter;
-
-import com.apkfuns.logutils.LogUtils;
 import com.example.hdxy.baseproject.Base.BaseImpl;
 import com.example.hdxy.baseproject.Base.basemvp.presenters.XBasePresenter;
 import com.example.hdxy.baseproject.Http.subscriber.DialogObserver;
@@ -8,10 +6,13 @@ import com.example.hdxy.baseproject.UI.home.bean.BookInfoBean;
 import com.example.hdxy.baseproject.UI.home.mvp.contract.HomeContract;
 import com.example.hdxy.baseproject.UI.home.mvp.model.HomeModel;
 
-/**
- * Created by hdxy on 2018/12/4.
- */
 
+/**
+ * description: 首页Presenter
+ * @author : wzx
+ * email : 445826958@qq.com
+ * date : 2019/12/2
+ */
 public class HomePresenter extends XBasePresenter<HomeContract.View,HomeModel> implements HomeContract.Presenter {
 
     @Override

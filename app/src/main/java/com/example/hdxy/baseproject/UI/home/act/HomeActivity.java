@@ -18,7 +18,7 @@ import java.lang.ref.WeakReference;
 public class HomeActivity extends BaseActivity<HomePresenter> implements HomeContract.View {
 
 
-    private TitleBar mTitleBar;
+
 
     @Override
     protected int getLayoutId() {
@@ -33,11 +33,9 @@ public class HomeActivity extends BaseActivity<HomePresenter> implements HomeCon
         WeakReference<HomeActivity> weakReference = new WeakReference<>(this);
         presenter.getBookInfoFromNet(weakReference.get());
         presenter.textRxjavaLife(weakReference.get());
-
-        mTitleBar = findViewById(R.id.titlebar);
         mTitleBar.setBackTitle("我是标题",null);
-
     }
+
 
     @Override
     public void onBookInfoSuccess(BookInfoBean data) {

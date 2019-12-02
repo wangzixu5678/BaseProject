@@ -74,6 +74,9 @@ dependencies {
     implementation ext.logUtils
     implementation ext.flexbox
 
+    implementation ext.alertView
+
+    implementation ext.immersionbar
     /**
      * 网络框架 EaseHttp
      * MVP 框架 XMVP
